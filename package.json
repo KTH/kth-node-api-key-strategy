@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "passport": "0.3.2",
-    "kth-node-log": "git@github.com:KTH/kth-node-log.git#v1.0.0"
+    "kth-node-log": "https://github.com/KTH/kth-node-log.git#v1.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:KTH/kth-node-api-key-strategy.git"
+    "url": "https://github.com/KTH/kth-node-api-key-strategy.git"
   },
   "keywords": [
     "api",
