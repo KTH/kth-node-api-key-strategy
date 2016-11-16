@@ -8,7 +8,7 @@
 var passport = require('passport')
 var util = require('util')
 var log = { debug: console.log,
-	info: console.log,
+  info: console.log,
   warn: console.log,
   error: console.log }
 
@@ -114,7 +114,7 @@ function verifyApiKey (req, apikey, configuredApiKeys, done) {
   }
 
   err = '401'
-  return done(err)
+  return done(null, null, err)
 }
 
 /**
