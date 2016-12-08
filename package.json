@@ -1,6 +1,6 @@
 {
   "name": "kth-node-api-key-strategy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A api key strategy for Node projects.",
   "main": "index.js",
   "scripts": {
