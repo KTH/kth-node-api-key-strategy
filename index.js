@@ -33,7 +33,7 @@ function Strategy (options, verify) {
   this._apiKeyHeader = options.apiKeyHeader || 'api_key'
   this.name = 'apikey'
   this._verify = verify
-  this._passReqToCallback = true // options.passReqToCallback
+  this._passReqToCallback = true
 }
 
 /**
@@ -72,11 +72,7 @@ Strategy.prototype.authenticate = function (req, options) {
     self.success(user, info)
   }
 
-  if (self._passReqToCallback) {
-    this._verify(req, apikey, verified)
-  } else {
-    this._verify(apikey, verified)
-  }
+  this._verify(req, apikey, verified)
 }
 
 /**
@@ -85,7 +81,7 @@ Strategy.prototype.authenticate = function (req, options) {
  */
 function BadRequestError (message) {
   this.name = 'BadRequestError'
-  this.message = message || null
+  this.message = message
   this.stack = (new Error()).stack
 }
 
@@ -94,27 +90,24 @@ BadRequestError.prototype = Object.create(Error.prototype)
 BadRequestError.prototype.constructor = BadRequestError
 
 function verifyApiKey (req, apikey, configuredApiKeys, done) {
-  // var authenticated = false
-  var err, user
-
-  for (var i = 0; i < configuredApiKeys.length; i++) {
-    var client = configuredApiKeys[ i ]
-    if (client.apikey === apikey) {
-      log.debug('Authenticate ' + client.name)
-      for (var s = 0; s < client.scope.length; s++) {
-        var assignedScope = client.scope[ s ]
-        if (req.scope.indexOf(assignedScope) >= 0) {
-          user = client.name
-          // authenticated = true
-
-          return done(null, user)
+  try {
+    for (var i = 0; i < configuredApiKeys.length; i++) {
+      var client = configuredApiKeys[ i ]
+      if (client.apikey === apikey) {
+        log.debug('Authenticate ' + client.name)
+        for (var s = 0; s < client.scope.length; s++) {
+          var assignedScope = client.scope[ s ]
+          if (req.scope.indexOf(assignedScope) >= 0) {
+            return done(null, client.name)
+          }
         }
       }
     }
-  }
 
-  err = '401'
-  return done(null, null, err)
+    return done(null, null, '401')
+  } catch (err) {
+    done(err)
+  }
 }
 
 /**
