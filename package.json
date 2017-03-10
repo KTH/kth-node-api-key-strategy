@@ -27,6 +27,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "standard": "^7.1.2"
+    "passport": "^0.3.2",
+    "standard": "^7.1.2",
+    "kth-node-log": "https://github.com/KTH/kth-node-log.git#v1.0.1"
   }
 }
