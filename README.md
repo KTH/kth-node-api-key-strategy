@@ -1,4 +1,5 @@
 # kth-node-api-key-strategy
+[![Build Status](https://travis-ci.org/KTH/kth-node-api-key-strategy.svg?branch=master)](https://travis-ci.org/KTH/kth-node-api-key-strategy)
 A api key strategy for Node applications.
 
 ## Configure 

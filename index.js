@@ -121,5 +121,5 @@ function verifyApiKey (req, apikey, configuredApiKeys, done) {
  * Expose `Strategy`.
  * And verify function.
  */
-exports.Strategy = Strategy
-exports.verifyApiKey = verifyApiKey
+module.exports.Strategy = Strategy
+module.exports.verifyApiKey = verifyApiKey
