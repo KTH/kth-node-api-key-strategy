@@ -1,11 +1,11 @@
 {
   "name": "kth-node-api-key-strategy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A api key strategy for Node projects.",
   "main": "index.js",
   "scripts": {
     "codecheck": "standard",
-    "test":"mocha tests/**",
+    "test": "mocha tests/**",
     "preversion": "npm run codecheck && npm run test",
     "postversion": "git push && git push --tags"
   },
