@@ -32,5 +32,10 @@
     "node-mocks-http": "^1.6.1",
     "passport": "^0.3.2",
     "standard": "^7.1.2"
+  },
+  "standard": {
+    "ignore": [
+      "tests/test-strategy.js"
+    ]
   }
 }
