@@ -4,13 +4,14 @@ A api key strategy for Node applications.
 
 ## Configure 
 
-#### localSettings.js
+#### serverSettings.js
 ```
 module.exports = {
   secure: {
     api_keys: [
-      {name: 'devClient', apikey: '1234', scope: ['write', 'read']},
-      {name: 'testClient', apikey: '123456', scope: ['read']}
+      {name: 'devClient', apikey: '1234567', scope: ['write', 'read']},
+      {name: 'testClient', apikey: '891011', scope: ['read']}
+      {name: 'publicClient', apikey: '0000', scope: ['readPublic']}
     ],
   }
 };
@@ -46,7 +47,8 @@ module.exports = {
       "in": "header",
       "scopes": {
         "read": "Read access to data",
-        "write": "Write access to data"
+        "write": "Write access to data",
+        "readPublic": "Read only access to publicly visible data",
       }
     }
   }

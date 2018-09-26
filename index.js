@@ -1,5 +1,6 @@
 /**
  * ApiKey Strategy.
+ *
  * Configure the keys to use in localSettings.js within secure: {}.
  * Configure: api_keys: [{name: 'NAME of client', apikey: 'THE API key', scope: ['Name of scope']}
  * Sample: api_keys: [{name: 'pontus', apikey: 'AAAA', scope: ['write']}, {name: 'ove', apikey: 'BBBB', scope: ['read']}, {name: 'jon', apikey: '1234', scope: ['write', 'read']}],
@@ -98,6 +99,9 @@ function verifyApiKey (req, apikey, configuredApiKeys, done) {
         for (var s = 0; s < client.scope.length; s++) {
           var assignedScope = client.scope[ s ]
           if (req.scope.indexOf(assignedScope) >= 0) {
+            req.apiClient = {}
+            req.apiClient.name = client.name
+            req.apiClient.scope = client.scope
             return done(null, client.name)
           }
         }
