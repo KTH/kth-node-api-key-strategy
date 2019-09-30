@@ -1,14 +1,12 @@
 {
   "name": "kth-node-api-key-strategy",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A api key strategy for Node API projects.",
   "main": "index.js",
   "scripts": {
     "codecheck": "standard",
-    "test": "mocha tests/**",
-    "coverage": "istanbul cover _mocha tests/**",
-    "preversion": "npm run codecheck && npm run test",
-    "postversion": "git push && git push --tags"
+    "test": "mocha tests/** --exit",
+    "build": "./build.sh"
   },
   "peerDependencies": {
     "passport": "^0.4.0"
@@ -17,17 +15,24 @@
     "type": "git",
     "url": "https://github.com/KTH/kth-node-api-key-strategy.git"
   },
+  "bugs": {
+    "url": "https://github.com/KTH/kth-node-api-key-strategy/issues"
+  },
+  "homepage": "https://github.com/KTH/kth-node-api-key-strategy#readme",
   "keywords": [
     "api",
     "key",
     "strategy"
   ],
-  "author": "KTH",
+  "author": {
+    "name": "KTH",
+    "email": "infosys@kth.se",
+    "url": "https://github.com/KTH"
+  },
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
+    "mocha": "^6.2.1",
     "nock": "^10.0.0",
     "node-mocks-http": "^1.7.0",
     "passport": "^0.4.0",
