@@ -2,10 +2,12 @@
   "name": "kth-node-api-key-strategy",
   "version": "1.0.9",
   "description": "A api key strategy for Node API projects.",
+  "automaticPublish": "true",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/** --exit",
-    "build": "./build.sh"
+    "build": "./build.sh",
+    "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
   },
   "peerDependencies": {
     "passport": "^0.4.1"
@@ -32,13 +34,13 @@
   "devDependencies": {
     "@kth/eslint-config-kth": "^1.0.10",
     "chai": "^4.3.4",
-    "eslint": "^7.24.0",
+    "eslint": "^7.26.0",
     "husky": "^6.0.0",
-    "mocha": "^8.3.2",
+    "mocha": "^8.4.0",
     "nock": "^13.0.11",
     "node-mocks-http": "^1.10.1",
     "passport": "^0.4.1",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0"
   },
   "prettier": {
