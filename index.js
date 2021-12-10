@@ -8,15 +8,12 @@
  */
 var passport = require('passport')
 var util = require('util')
-var log = { debug: console.log,
-  info: console.log,
-  warn: console.log,
-  error: console.log }
+var log = { debug: console.log, info: console.log, warn: console.log, error: console.log }
 
 /**
  * Creates an instance of `Strategy` checking api keys.
  */
-function Strategy (options, verify) {
+function Strategy(options, verify) {
   if (typeof options === 'function') {
     verify = options
     options = {}
@@ -51,9 +48,6 @@ util.inherits(Strategy, passport.Strategy)
 Strategy.prototype.authenticate = function (req, options) {
   options = options || {}
   var apikey = req.header(this._apiKeyHeader)
-  if (!apikey) {
-    apikey = req.query[ this._apiKeyHeader ] // swagger compatible
-  }
 
   if (!apikey) {
     return this.fail(new BadRequestError('Missing API Key'))
@@ -80,24 +74,24 @@ Strategy.prototype.authenticate = function (req, options) {
  * `BadRequestError` error.
  * @api public
  */
-function BadRequestError (message) {
+function BadRequestError(message) {
   this.name = 'BadRequestError'
   this.message = message
-  this.stack = (new Error()).stack
+  this.stack = new Error().stack
 }
 
 // inherit from Error
 BadRequestError.prototype = Object.create(Error.prototype)
 BadRequestError.prototype.constructor = BadRequestError
 
-function verifyApiKey (req, apikey, configuredApiKeys, done) {
+function verifyApiKey(req, apikey, configuredApiKeys, done) {
   try {
     for (var i = 0; i < configuredApiKeys.length; i++) {
-      var client = configuredApiKeys[ i ]
+      var client = configuredApiKeys[i]
       if (client.apikey === apikey) {
         log.debug('Authenticate ' + client.name)
         for (var s = 0; s < client.scope.length; s++) {
-          var assignedScope = client.scope[ s ]
+          var assignedScope = client.scope[s]
           if (req.scope.indexOf(assignedScope) >= 0) {
             req.apiClient = {}
             req.apiClient.name = client.name
