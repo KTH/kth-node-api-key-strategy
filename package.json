@@ -3,6 +3,9 @@
   "version": "2.0.2",
   "description": "A api key strategy for Node API projects.",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "mocha tests/** --exit",
     "build": "./build.sh",
