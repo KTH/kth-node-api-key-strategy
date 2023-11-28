@@ -1,5 +1,3 @@
-npm install
+set -e
 
-npm test
-
-rm -rf node_modules
+npm ci

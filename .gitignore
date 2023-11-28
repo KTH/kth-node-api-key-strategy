@@ -6,6 +6,5 @@ npm-debug.log
 
 # Packages
 node_modules
-package-lock.json
 
 coverage
