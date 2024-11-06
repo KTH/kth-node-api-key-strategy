@@ -37,7 +37,7 @@
     "@kth/eslint-config-kth": "^3.0.7",
     "chai": "^4.3.10",
     "eslint": "^8.12.0",
-    "husky": "^7.0.2",
+    "husky": "^9.1.6",
     "mocha": "^10.2.0",
     "nock": "^13.4.0",
     "node-mocks-http": "^1.13.0",
