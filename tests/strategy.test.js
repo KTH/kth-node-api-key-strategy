@@ -1,7 +1,7 @@
 const httpMocks = require('node-mocks-http')
 
-const Strategy = require('../index').Strategy
-const verifyApiKey = require('../index').verifyApiKey
+const { Strategy } = require('../index')
+const { verifyApiKey } = require('../index')
 
 const cb = function (error, user, info) {
   if (error) throw error
@@ -34,17 +34,17 @@ strategy.fail = function (reason) {
   fail = reason
 }
 
-describe('Creating strategies', function () {
-  it('should require a verify function', function () {
+describe('Creating strategies', () => {
+  it('should require a verify function', () => {
     try {
-      let failingStrategy = new Strategy()
+      const failingStrategy = new Strategy()
       expect(failingStrategy).toBeUndefined()
     } catch (err) {
       expect(err).toBeDefined()
     }
   })
-  it('should accept a logger function', function () {
-    let succeedingStrategy = new Strategy(
+  it('should accept a logger function', () => {
+    const succeedingStrategy = new Strategy(
       {
         log: {
           debug: () => {},
@@ -54,8 +54,8 @@ describe('Creating strategies', function () {
     )
     expect(succeedingStrategy).toBeDefined()
   })
-  it('should accept another apiKeyHeader', function () {
-    let succeedingStrategy = new Strategy(
+  it('should accept another apiKeyHeader', () => {
+    const succeedingStrategy = new Strategy(
       {
         log: {
           debug: () => {},
@@ -66,41 +66,41 @@ describe('Creating strategies', function () {
     )
     expect(succeedingStrategy._apiKeyHeader).toBe('myHeader')
   })
-  it('should accept a verify function as options param', function () {
-    let succeedingStrategy = new Strategy(verify)
+  it('should accept a verify function as options param', () => {
+    const succeedingStrategy = new Strategy(verify)
     expect(succeedingStrategy).toBeDefined()
   })
 })
 
-describe('Testing verifyApiKey', function () {
-  it('should return 401 with no arguments', function () {
-    let err = verifyApiKey({}, {}, {}, cb)
+describe('Testing verifyApiKey', () => {
+  it('should return 401 with no arguments', () => {
+    const err = verifyApiKey({}, {}, {}, cb)
     expect(err).toBe('401')
   })
-  it('should return an authenticated user', function () {
+  it('should return an authenticated user', () => {
     const req = httpMocks.createRequest()
     req.scope = ['read']
 
-    let user = verifyApiKey(req, '1234', configuredApiKeys, cb)
+    const user = verifyApiKey(req, '1234', configuredApiKeys, cb)
     expect(user).toBe('kalle')
   })
-  it('should not allow a read user to write', function () {
+  it('should not allow a read user to write', () => {
     const req = httpMocks.createRequest()
     req.scope = ['write']
 
-    let user = verifyApiKey(req, '1234', configuredApiKeys, cb)
+    const user = verifyApiKey(req, '1234', configuredApiKeys, cb)
     expect(user).toBe('401')
   })
 })
 
-describe('Testing Strategy', function () {
-  beforeEach(function () {
+describe('Testing Strategy', () => {
+  beforeEach(() => {
     result = undefined
     error = undefined
     fail = undefined
   })
 
-  it('should allow an authenticated user via headers', function () {
+  it('should allow an authenticated user via headers', () => {
     const req = httpMocks.createRequest({
       headers: { api_key: '1234' },
     })
@@ -112,7 +112,7 @@ describe('Testing Strategy', function () {
     expect(fail).toBeUndefined()
   })
 
-  it('should allow an authenticated user via query parameters', function () {
+  it('should allow an authenticated user via query parameters', () => {
     const req = httpMocks.createRequest({
       query: { api_key: '1234' },
     })
@@ -125,7 +125,7 @@ describe('Testing Strategy', function () {
     expect(fail.message).toBe('Missing API Key')
   })
 
-  it('should fail for an unauthenticated user', function () {
+  it('should fail for an unauthenticated user', () => {
     const req = httpMocks.createRequest({})
     req.scope = ['read']
     strategy.authenticate(req)
@@ -134,7 +134,7 @@ describe('Testing Strategy', function () {
     expect(fail.message).toBe('Missing API Key')
   })
 
-  it('should fail for a bad api key', function () {
+  it('should fail for a bad api key', () => {
     const req = httpMocks.createRequest({
       headers: { api_key: 'bad_api_key' },
     })
@@ -144,7 +144,7 @@ describe('Testing Strategy', function () {
     expect(error).toBeUndefined()
     expect(fail).toBe('401')
   })
-  it('should set errors from verify with error function', function () {
+  it('should set errors from verify with error function', () => {
     const req = httpMocks.createRequest({
       headers: { api_key: 'asdf' },
     })

@@ -6,9 +6,10 @@
  * Sample: api_keys: [{name: 'pontus', apikey: 'AAAA', scope: ['write']}, {name: 'ove', apikey: 'BBBB', scope: ['read']}, {name: 'jon', apikey: '1234', scope: ['write', 'read']}],
  * client "pontus" has a key with scope 'write', client "ove" has a key with scope 'read' and finally client "jon" has a key with scopes 'read' and 'write'
  */
-var passport = require('passport')
-var util = require('util')
-var log = { debug: console.log, info: console.log, warn: console.log, error: console.log }
+const util = require('util')
+const passport = require('passport')
+
+let log = { debug: console.log, info: console.log, warn: console.log, error: console.log }
 
 /**
  * Creates an instance of `Strategy` checking api keys.
@@ -47,17 +48,17 @@ util.inherits(Strategy, passport.Strategy)
  */
 Strategy.prototype.authenticate = function (req, options) {
   options = options || {}
-  var apikey = req.header(this._apiKeyHeader)
+  const apikey = req.header(this._apiKeyHeader)
 
   if (!apikey) {
     return this.fail(new BadRequestError('Missing API Key'))
   }
 
-  var self = this
+  const self = this
   /*
    * Verifies the user login add set error, fail or success depending on the result.
    */
-  var verified = function (err, user, info) {
+  const verified = function (err, user, info) {
     if (err) {
       return self.error(err)
     }
@@ -86,12 +87,12 @@ BadRequestError.prototype.constructor = BadRequestError
 
 function verifyApiKey(req, apikey, configuredApiKeys, done) {
   try {
-    for (var i = 0; i < configuredApiKeys.length; i++) {
-      var client = configuredApiKeys[i]
+    for (let i = 0; i < configuredApiKeys.length; i++) {
+      const client = configuredApiKeys[i]
       if (client.apikey === apikey) {
         log.debug('Authenticate ' + client.name)
-        for (var s = 0; s < client.scope.length; s++) {
-          var assignedScope = client.scope[s]
+        for (let s = 0; s < client.scope.length; s++) {
+          const assignedScope = client.scope[s]
           if (req.scope.indexOf(assignedScope) >= 0) {
             req.apiClient = {}
             req.apiClient.name = client.name

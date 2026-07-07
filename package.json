@@ -7,7 +7,10 @@
     "index.js"
   ],
   "scripts": {
+    "lint": "eslint --quiet",
+    "lint-v": "eslint",
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "./build.sh",
     "prepare": "husky"
   },
